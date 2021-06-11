@@ -6,6 +6,8 @@ authors = ["guglielmo <guglielmo@openpolis.it>"]
 maintainers = ["guglielmo <guglielmo@openpolis.it>"]
 readme = "README.md"
 license = "MIT"
+repository = "https://github.com/openpolis/op-state-aids/"
+
 
 [tool.poetry.scripts]
 op-state-aids = "op_state_aids.main:app"
