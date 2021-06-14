@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "op-state-aids"
-version = "0.1.1"
+version = "(0, 1, 2)"
 description = "CLI to extract state aids data from public sources and produce CSV files"
 authors = ["guglielmo <guglielmo@openpolis.it>"]
 maintainers = ["guglielmo <guglielmo@openpolis.it>"]
