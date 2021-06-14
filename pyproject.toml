@@ -13,15 +13,20 @@ repository = "https://github.com/openpolis/op-state-aids/"
 op-state-aids = "op_state_aids.main:app"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.7"
 typer = "^0.3.2"
 openpyxl = "^3.0.7"
 pandas = "^1.2.4"
 requests = "^2.25.1"
 validators = "^0.18.2"
+importlib-metadata = "^4.5.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+isort = "^5.8.0"
+flake8 = "^3.9.2"
+tox = "^3.23.1"
+tox-poetry = "^0.4.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
