@@ -78,9 +78,7 @@ This project is funded by the European Commission and is currently (2021) under 
 
 ## Roadmap
 Data fetching for over 12 EU countries will be implemented in the course of 2021.
-Please have a look at the CHANGELOG.md to check the proceedings.
- 
-
+Please have a look at the CHANGELOG.md to check  the proceedings.
 
 ## Contributing
 In order to contribute to this project:
