@@ -1,9 +1,10 @@
 import os
+from io import BytesIO
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import requests
-from io import BytesIO
 import typer
 import validators
 
@@ -17,19 +18,22 @@ def fetch(
     year: str,
     local_path: str = typer.Option(
         "./data/bg",
-        help="Local path to use for eufunds excel files."
+        help="Local path to use for eufunds excel files. Always use forward slashes."
     )
 ):
     """Fetch Excel file from the source and store it locally.
 
     Create the directory if it does not exist. Default directory is ./data/bg,
     and it can be changed with local_path.
+
+    Forward slaches based paths are translated into proper paths using `pathlib`,
+    so, even on Windows, there's no need to use backward slashes.
     """
 
     # script parameters validations
     assert(validate_year(year))
 
-    # years are mapped to their encoding
+    # years are mapped to their codes (sic)
     years_encoding = {
         '2014': '3xRCSNcrgNc%3D',
         '2015': '8U%2BIPGXBzzM%3D',
@@ -44,6 +48,7 @@ def fetch(
     }
 
     # create directory if not existing
+    local_path = Path(local_path)
     if not os.path.exists(local_path):
         os.makedirs(local_path)
 
@@ -56,7 +61,7 @@ def fetch(
     r = requests.get(excel_url)
 
     # store it locally
-    filepath = f"{local_path.strip('/')}/projects_{year}.xlsx"
+    filepath = local_path / f"projects_{year}.xlsx"
     with open(filepath, 'wb') as f:
         f.write(r.content)
     typer.echo(f"File saved to {filepath}")
@@ -88,7 +93,8 @@ def export(
     # the header starts at the 4th line
     # the pandas.DataFrame is created reading from the excel file's url
     typer.echo(f"Fetching EU data for year: {year}")
-    excel_file = f"{local_path.strip('/')}/projects_{year}.xlsx"
+    local_path = Path(local_path)
+    excel_file = local_path / f"projects_{year}.xlsx"
     eu_df = pd.read_excel(f"file://localhost/{os.path.abspath(excel_file)}", header=3)
 
     # The last 6 rows are removed from the dataframe, as they contain the notes
@@ -169,6 +175,7 @@ def export(
 
     # emit csv
     typer.echo(f"{len(eu_df)} matches found.")
+    csv_filepath = local_path / f"{year}.csv"
     if len(eu_df):
-        typer.echo(f"Writing results to {local_path.strip('/')}/{year}.csv")
-        eu_df.to_csv(f"{local_path.strip('/')}/{year}.csv", na_rep='', index=False)
+        typer.echo(f"Writing results to {csv_filepath}")
+        eu_df.to_csv(csv_filepath, na_rep='', index=False)
