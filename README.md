@@ -4,10 +4,9 @@
 to import **state aids related data**.
 
 
-## Badges
-* passing tests
-* coverage
-* tox
+https://travis-ci.com/openpolis/op-state-aids.svg?branch=master
+
+* passing tests and coverage
 * pypi package
 
 ## Installation
