@@ -1,20 +1,20 @@
 ## Description
 
-`op-state-aids` is a Command Line Interface that can be used 
-to import **state aids related data**.
+`eu-state-aids` is a Command Line Interface that can be used 
+to import **state aids related data** from single countries sources sitesm
+and produce CSV files, according to a common  data structure.
 
 
-![TravisCI Badge](https://travis-ci.com/openpolis/op-state-aids.svg?branch=master "TravisCI building status")
-
-
-* passing tests and coverage
-* pypi package
+![TravisCI Badge](https://travis-ci.com/openpolis/eu-state-aids.svg?branch=master "TravisCI building status")
+[![PyPI version](https://badge.fury.io/py/eu-state-aids.svg)](https://badge.fury.io/py/eu-state-aids)
+![Tests Badge](https://op-badges.s3.eu-west-1.amazonaws.com/eu-state-aids/tests-badge.svg)
+![Coverage Badge](https://op-badges.s3.eu-west-1.amazonaws.com/eu-state-aids/coverage-badge.svg)
 
 ## Installation
 
-Python version 3.7 and greater are supported.
+Python versions from 3.7 are supported.
  
-The package depends on these packages:
+The package depends on these python packages:
 * typer
 * openpyxl
 * pandas
@@ -25,15 +25,15 @@ So, it's better to create a *virtualenv* before installation.
 
 The package is hosted on pypi, and can be installed, for example using pip:
 
-    pip install op-state-aids 
+    pip install eu-state-aids 
 
 
 ## Usage
 
-The `op-state-aids` binary command will be available after installation. 
+The `eu-state-aids` binary command will be available after installation. 
 It offers help with:
 
-    op-state-aids --help
+    eu-state-aids --help
 
 The `opstate-aids` command can be used to extract the data from the official sources, 
 and populate the CSV files.
@@ -50,21 +50,21 @@ that will be executable as a sub-command.
 
 To retrieve data and produce a CSV file for Bulgary (bg), 2015:
  
-      op-state-aids bg fetch 2015
-      op-state-aids bg export 2015
+      eu-state-aids bg fetch 2015
+      eu-state-aids bg export 2015
 
 To launch the scripts *for all years* for Bulgary (bg):
 
     # download all years' excel files into local storage 
     for Y in $(seq 2014 2022)
     do 
-      op-state-aids bg fetch $Y
+      eu-state-aids bg fetch $Y
     done
     
     # process all years' excel files and export CSV records into local storage 
     #./data/bg/$Y.csv files
     for Y in $(seq 2014 2022)
-      op-state-aids bg export $Y
+      eu-state-aids bg export $Y
     done
 
 ## Support

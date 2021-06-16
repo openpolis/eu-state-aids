@@ -1,6 +1,8 @@
 import validators
+from validators.utils import validator
 
 
+@validator
 def validate_year(y: str) -> bool:
     """Validate y as a valid year
 
@@ -10,6 +12,6 @@ def validate_year(y: str) -> bool:
     try:
         y = int(y)
     except ValueError:
-        raise validators.ValidationFailure
+        return False
 
     return validators.between(y, min=2010, max=2050)
