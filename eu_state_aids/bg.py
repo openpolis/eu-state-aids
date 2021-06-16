@@ -112,16 +112,16 @@ def export(
 
     def lookup_id(x):
         try:
-            return str(x).split(' ', 1)[0]
-        except IndexError:
+            return int(str(x).split(' ', 1)[0])
+        except ValueError:
             return np.NAN
     eu_df['ID of the beneficiary'] = eu_df.Beneficiary.apply(lookup_id)
 
     def build_eu_prog_id(x):
-        try:
-            return program_start_year + x.split('-', 1)[0]
-        except AttributeError:
+        splits = x.split('-', 1)
+        if len(splits) < 2:
             return np.NAN
+        return program_start_year + x.split('-', 1)[0]
     eu_df['European operation program (ID)'] = eu_df['Project proposal number'].apply(build_eu_prog_id)
 
     eu_df['Amounts (€)'] = eu_df['Total'] * 0.51
@@ -140,10 +140,11 @@ def export(
     stateaid_df = stateaid_df.iloc[:, :10]
 
     def build_eu_prog_aid_id(x):
-        try:
-            return '-'.join(x.split('-')[:-1])
-        except AttributeError:
+        splits = x.split('-')
+        if len(splits) < 3:
             return np.NAN
+        else:
+            return '-'.join(splits[:-1])
     eu_df.dropna(subset=['Project proposal number'], inplace=True)
     eu_df['EUProgAidID'] = eu_df['Project proposal number'].apply(build_eu_prog_aid_id)
     eu_df.dropna(subset=['EUProgAidID', 'ID of the beneficiary'], inplace=True)
