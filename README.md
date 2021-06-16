@@ -4,7 +4,6 @@
 to import **state aids related data** from single countries sources sitesm
 and produce CSV files, according to a common  data structure.
 
-
 ![TravisCI Badge](https://travis-ci.com/openpolis/eu-state-aids.svg?branch=master "TravisCI building status")
 [![PyPI version](https://badge.fury.io/py/eu-state-aids.svg)](https://badge.fury.io/py/eu-state-aids)
 ![Tests Badge](https://op-badges.s3.eu-west-1.amazonaws.com/eu-state-aids/tests-badge.svg)
@@ -84,6 +83,8 @@ In order to contribute to this project:
 * install the dependencies in the virtualenv, with `poetry install`,
   this will also install the dev dependencies
 * develop wildly, running tests and coverage with `coverage run -m pytest`
+* create a [pull reuqest](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+* wait for the maintainers to review and eventually merge your pull request into the main repository
 
 ### Testing
 Tests are under the tests folder. [requests-mock](https://requests-mock.readthedocs.io/en/latest/index.html)

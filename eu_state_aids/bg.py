@@ -105,14 +105,14 @@ def export(
 
     def lookup_name(x):
         try:
-            return x.split(' ', 1)[1]
+            return str(x).split(' ', 1)[1]
         except IndexError:
-            return x
+            return str(x)
     eu_df['Name of the beneficiary'] = eu_df.Beneficiary.apply(lookup_name)
 
     def lookup_id(x):
         try:
-            return x.split(' ', 1)[0]
+            return str(x).split(' ', 1)[0]
         except IndexError:
             return np.NAN
     eu_df['ID of the beneficiary'] = eu_df.Beneficiary.apply(lookup_id)
@@ -146,7 +146,7 @@ def export(
             return np.NAN
     eu_df.dropna(subset=['Project proposal number'], inplace=True)
     eu_df['EUProgAidID'] = eu_df['Project proposal number'].apply(build_eu_prog_aid_id)
-    eu_df.dropna(subset=['EUProgAidID'], inplace=True)
+    eu_df.dropna(subset=['EUProgAidID', 'ID of the beneficiary'], inplace=True)
 
     def lookup_prog_id(x):
         """Looks up for program ID in stateaid_df
