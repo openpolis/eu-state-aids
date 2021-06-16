@@ -21,7 +21,7 @@ local_test_path = Path("./data/test/")
 
 
 def test_version():
-    assert __version__ == "0.1.3"
+    assert __version__ == "0.2.0"
 
 
 def test_validate_year_not_int():
