@@ -1,16 +1,16 @@
 [tool.poetry]
-name = "op-state-aids"
+name = "eu-state-aids"
 version = "0.2.0"
 description = "CLI to extract state aids data from public sources and produce CSV files"
 authors = ["guglielmo <guglielmo@openpolis.it>"]
 maintainers = ["guglielmo <guglielmo@openpolis.it>"]
 readme = "README.md"
 license = "MIT"
-repository = "https://github.com/openpolis/op-state-aids/"
+repository = "https://github.com/openpolis/eu-state-aids/"
 
 
 [tool.poetry.scripts]
-op-state-aids = "op_state_aids.main:app"
+eu-state-aids = "eu_state_aids.main:app"
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4"

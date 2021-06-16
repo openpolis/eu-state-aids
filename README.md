@@ -73,22 +73,25 @@ There is no guaranteed support available, but issues can be created on this proj
 and the authors will try to answer and merge proposed solutions into the code base.
 
 ## Project Status
-
 This project is funded by the European Commission and is currently (2021) under active developement.
-
-## Roadmap
-Data fetching for over 12 EU countries will be implemented in the course of 2021.
-Please have a look at the CHANGELOG.md to check  the proceedings.
 
 ## Contributing
 In order to contribute to this project:
-* git clone
-* tests and coverage
-* python versions
+* verify that python 3.7+ is being used (or use [pyenv](https://github.com/pyenv/pyenv))
+* verify or install [poetry](https://python-poetry.org/), to handle packages and dependencies in a leaner way, 
+  with respect to pip and requirements
+* clone the project `git clone git@github.com:openpolis/eu-state-aids.git` 
+* install the dependencies in the virtualenv, with `poetry install`,
+  this will also install the dev dependencies
+* develop wildly, running tests and coverage with `coverage run -m pytest`
+
+### Testing
+Tests are under the tests folder. [requests-mock](https://requests-mock.readthedocs.io/en/latest/index.html)
+is used to mock requests to remote data files, in order to avoid slow remote connections during tests.
 
 ## Authors
-Guglielmo Celata for Fondazione Openpolis
+Guglielmo Celata - guglielmo@openpolis.it
 
 ## Licensing
-This package is licensed through an MIT License, see details in the LICENSE.txt file.
+This package is released under an MIT License, see details in the LICENSE.txt file.
 
