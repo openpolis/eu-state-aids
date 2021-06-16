@@ -8,7 +8,7 @@ import requests
 import typer
 import validators
 
-from op_state_aids.utils import validate_year
+from eu_state_aids.utils import validate_year
 
 app = typer.Typer()
 

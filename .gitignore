@@ -2,5 +2,12 @@ __pycache__/
 .git
 .idea
 .python-version
+.DS_Store
+.coverage
+coverage-badge.svg
+coverage.xml
+htmlcov/
+junit.xml
+tests-badge.svg
 dist
 data
