@@ -6,9 +6,9 @@ and produce CSV files, according to a common  data structure.
 
 ![TravisCI Badge](https://travis-ci.com/openpolis/eu-state-aids.svg?branch=master "TravisCI building status")
 [![PyPI version](https://badge.fury.io/py/eu-state-aids.svg)](https://badge.fury.io/py/eu-state-aids)
-![Tests Badge](https://op-badges.s3.eu-west-1.amazonaws.com/eu-state-aids/tests-badge.svg?1)
-![Coverage Badge](https://op-badges.s3.eu-west-1.amazonaws.com/eu-state-aids/coverage-badge.svg?1)
-![Flake8](https://op-badges.s3.eu-west-1.amazonaws.com/eu-state-aids/flake8-badge.svg?1)
+![Tests Badge](https://op-badges.s3.eu-west-1.amazonaws.com/eu-state-aids/tests-badge.svg?2)
+![Coverage Badge](https://op-badges.s3.eu-west-1.amazonaws.com/eu-state-aids/coverage-badge.svg?2)
+![Flake8](https://op-badges.s3.eu-west-1.amazonaws.com/eu-state-aids/flake8-badge.svg?2)
 
 ## Installation
 
