@@ -49,7 +49,7 @@ def generate_measures(
         os.makedirs(local_path)
 
     # build remote url and filepath, out of the year,
-    typer.echo(f"Fetching all misure files")
+    typer.echo("Fetching all misure files")
 
     df = pd.DataFrame()
     for year in range(2014, 2022):
@@ -61,7 +61,7 @@ def generate_measures(
                 continue
 
             xml_url = f"http://eu-state-aids.s3-eu-west-1.amazonaws.com/it/rna_mirror/" \
-            f"OpenDataMisure/OpenData_Misura_{year}_{month:02}.xml.zip"
+                f"OpenDataMisure/OpenData_Misura_{year}_{month:02}.xml.zip"
 
             typer.echo(f"Processing {xml_url}")
 
@@ -97,7 +97,7 @@ def generate_measures(
 
     # emit csv
     typer.echo(f"{len(df)} recordss found.")
-    csv_filepath = local_path / f"misure.csv"
+    csv_filepath = local_path / "misure.csv"
     if len(df):
         typer.echo(f"Writing results to {csv_filepath}")
         df.to_csv(csv_filepath, na_rep='', index=False)
@@ -135,7 +135,7 @@ def fetch(
     # build remote url and filepath, out of the year,
     typer.echo(f"Fetching Aiuti data for year: {year}, month: {month}")
     z_url = f"http://eu-state-aids.s3-eu-west-1.amazonaws.com/it/rna_mirror/" \
-    f"OpenDataAiuti/OpenData_Aiuti_{year}_{month}.xml.zip"
+        f"OpenDataAiuti/OpenData_Aiuti_{year}_{month}.xml.zip"
 
     # read remote excel file content
     r = requests.get(z_url)
@@ -148,7 +148,7 @@ def fetch(
         typer.echo(f"File saved to {filepath}")
         return True
     else:
-        typer.echo(f"File not found")
+        typer.echo("File not found")
         return False
 
 
@@ -161,7 +161,7 @@ def export(
     ),
     delete_processed: bool = typer.Option(False, help="Delete zipped xml file after processing")
 ):
-    """Read XML from local path, filter with misure from misure.csv, then 
+    """Read XML from local path, filter with misure from misure.csv, then
     compute and emit data as CSV file.
 
     Local path defaults to ./data/it, and can be changed with local_path.
@@ -178,7 +178,7 @@ def export(
         return
 
     # read misure csv from local_path
-    csv_filepath = Path(local_path) / f"misure.csv"
+    csv_filepath = Path(local_path) / "misure.csv"
     misure_df = pd.read_csv(csv_filepath)
     typer.echo(f"Misure dataframe read from {csv_filepath}.")
 
@@ -207,7 +207,7 @@ def export(
         with z.open(z_filename, "r") as zf:
             c = zf.read().decode()
             try:
-                adf = pdx.read_xml(re.sub("&#(\d+);", "", c), ["LISTA_AIUTI"])
+                adf = pdx.read_xml(re.sub(r"&#(\d+);", "", c), ["LISTA_AIUTI"])
             except Exception as e:
                 typer.echo(f"Error {e} while parsing {zip_file}")
                 continue
@@ -221,7 +221,7 @@ def export(
 
         # skip when no COD_CE_MISURA values are in the xml file
         if 'AIUTO|COD_CE_MISURA' not in adf.columns:
-            typer.echo(f"No COD_CE_MISURA in file")
+            typer.echo("No COD_CE_MISURA in file")
             continue
 
         # transform needed columns
