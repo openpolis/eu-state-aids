@@ -79,7 +79,8 @@ To launch the scripts *for all years* for Bulgary (bg):
     # process all years' excel files and export CSV records into local storage 
     #./data/bg/$Y.csv files
     for Y in $(seq 2014 2022)
-      eu-state-aids bg export $Y
+    do
+      python  -m eu_state_aids bg export $Y
     done
 
 ### API
@@ -97,6 +98,16 @@ importing the packages. All options values must be explicited in API calls.
       )
   
 
+### Note on italian data
+
+Italian government sources suffer from two issues.
+1. XML files are not automatically downloadable from single dedicated URLS, but must be downloaded manually,
+as the softare solution adopted for the open data section of the web site does not allow such individual downloads.
+They have been mirrored on a [public AWS resource](http://eu-state-aids.s3-website-eu-west-1.amazonaws.com/it/rna_mirror/), 
+and will be fetched from there.
+2. XML files have not been compressed and the `OpenData_Aiuto_*.xml` files are huge (~1GB). Once compressed, 
+their size reduce to 1/25th of the original size. So they will be stored on the AWS mirror in zipped format.
+ 
 ## Support
 
 There is no guaranteed support available, but authors will try to keep up with issues 

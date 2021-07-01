@@ -7,7 +7,7 @@ import requests_mock
 from validators.utils import ValidationFailure
 
 from eu_state_aids import __version__
-from eu_state_aids.utils import validate_year
+from eu_state_aids.utils import validate_year, validate_year_month
 
 from typer.testing import CliRunner
 
@@ -40,6 +40,26 @@ def test_validate_year_outrange():
     assert type(r) == ValidationFailure
     r = validate_year("2059")
     assert type(r) == ValidationFailure
+
+
+def test_validate_year_month_not_int():
+    r = validate_year_month("201415")
+    assert type(r) == ValidationFailure
+
+
+def test_validate_year_month_year_outrange():
+    r = validate_year_month("2104_12")
+    assert type(r) == ValidationFailure
+
+
+def test_validate_year_month_month_outrange():
+    r = validate_year_month("2014_18")
+    assert type(r) == ValidationFailure
+
+
+def test_validate_year_month_month_ok():
+    r = validate_year_month("2014_10")
+    assert r is True
 
 
 def test_bg_command():
