@@ -50,7 +50,7 @@ It offers help with:
 
     eu-state-aids --help
 
-The `opstate-aids` command can be used to extract the data from the official sources, 
+The `eu-state-aids` command can be used to extract the data from the official sources, 
 and populate the CSV files.
 
 For each country, data files will firstly be *fetched* and stored locally, 
@@ -63,6 +63,8 @@ high enough.
 The logic of these two phases can vary for each single european state, so each country will have a dedicated module,
 that will be executable as a sub-command.
 
+
+### Bulgary
 To retrieve data and produce a CSV file for Bulgary (bg), 2015:
  
       eu-state-aids bg fetch 2015
@@ -79,8 +81,35 @@ To launch the scripts *for all years* for Bulgary (bg):
     # process all years' excel files and export CSV records into local storage 
     #./data/bg/$Y.csv files
     for Y in $(seq 2014 2022)
-      eu-state-aids bg export $Y
+    do
+      python  -m eu_state_aids bg export $Y
     done
+
+### Italy
+Italy needs a slightly different procedure, as before invoking the fetch/export commands,
+a `misure.csv` file needs to be generated, so that all aids records found in XML files can be
+compared with found CE_CODE and filtered.
+
+      eu-state-aids bg generate_measures
+
+To retrieve data and produce a CSV file for Italy (it), 2015, there is actually no need to fetch the file,
+as files have been copied on a reliable source.
+ 
+      eu-state-aids bg export 2015 --delete-processed
+
+This will generate a loop over all months of 2015, fetch the files, if they're not already fetched, 
+extract, transform and filter the records for each month and emit a CSV file with all the records found.
+The amount of money is summed for each beneficiary (over all records in that year). The fetched file will be deleted
+after the procedure, if required through the `--delete-processed` option.
+
+To launch the scripts *for all years* for Italy (it):
+
+    # download all years' excel files into local storage 
+    for Y in $(seq 2014 2022)
+    do 
+      eu-state-aids it export $Y --delete-processed
+    done
+
 
 ### API
 The fetch and export logics can be used from within a python program, 
@@ -97,6 +126,16 @@ importing the packages. All options values must be explicited in API calls.
       )
   
 
+### Note on italian data
+
+Italian government sources suffer from two issues.
+1. XML files are not automatically downloadable from single dedicated URLS, but must be downloaded manually,
+as the softare solution adopted for the open data section of the web site does not allow such individual downloads.
+They have been mirrored on a [public AWS resource](http://eu-state-aids.s3-website-eu-west-1.amazonaws.com/it/rna_mirror/), 
+and will be fetched from there.
+2. XML files have not been compressed and the `OpenData_Aiuto_*.xml` files are huge (~1GB). Once compressed, 
+their size reduce to 1/25th of the original size. So they will be stored on the AWS mirror in zipped format.
+ 
 ## Support
 
 There is no guaranteed support available, but authors will try to keep up with issues 
